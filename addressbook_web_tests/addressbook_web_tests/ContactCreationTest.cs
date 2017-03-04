@@ -10,7 +10,7 @@ using OpenQA.Selenium.Support.UI;
 namespace WebAddressbookTests
 {
     [TestFixture]
-    public class GroupCreationTests
+    public class Untitled5
     {
         private IWebDriver driver;
         private StringBuilder verificationErrors;
@@ -20,7 +20,7 @@ namespace WebAddressbookTests
         [SetUp]
         public void SetupTest()
         {
-            driver = new FirefoxDriver(new FirefoxBinary("C:\\Program Files\\Mozilla Firefox\\firefox.exe"),new FirefoxProfile());
+            driver = new FirefoxDriver(new FirefoxBinary("C:\\Program Files\\Mozilla Firefox\\firefox.exe"), new FirefoxProfile());
             baseURL = "http://localhost/";
             verificationErrors = new StringBuilder();
         }
@@ -40,17 +40,12 @@ namespace WebAddressbookTests
         }
 
         [Test]
-        public void GroupCreationTest()
+        public void ContactCreationTest()
         {
             OpenHomePage();
             LogIn(new AccountData("admin", "secret"));
-            GoToGroupsPage();
-            InitGroupCreation();
-            GroupData group = new WebAddressbookTests.GroupData("aaa");
-            group.Header = "bbb";
-            group.Footer = "ccc";
-            SubmitGroupCreation();
-            ReturnToGroupPage();
+            ClickAddNew();
+            ContactData group = new WebAddressbookTests.ContactData("aaa", "bbb");
             LogOut();
         }
 
@@ -59,26 +54,9 @@ namespace WebAddressbookTests
             driver.FindElement(By.LinkText("Logout")).Click();
         }
 
-        private void ReturnToGroupPage()
+        private void ClickAddNew()
         {
-            driver.FindElement(By.LinkText("group page")).Click();
-        }
-
-        private void SubmitGroupCreation()
-        {
-            driver.FindElement(By.Name("submit")).Click();
-        }
-
-       
-
-        private void InitGroupCreation()
-        {
-            driver.FindElement(By.Name("new")).Click();
-        }
-
-        private void GoToGroupsPage()
-        {
-            driver.FindElement(By.LinkText("groups")).Click();
+            driver.FindElement(By.LinkText("add new")).Click();
         }
 
         private void LogIn(AccountData account)
