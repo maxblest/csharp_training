@@ -45,13 +45,19 @@ namespace WebAddressbookTests
             OpenHomePage();
             LogIn(new AccountData("admin", "secret"));
             ClickAddNew();
-            ContactData group = new WebAddressbookTests.ContactData("aaa", "bbb");
+            FillContactForm(new ContactData("aaa", "bbb"));
             LogOut();
         }
 
         private void LogOut()
         {
             driver.FindElement(By.LinkText("Logout")).Click();
+        }
+
+        private void FillContactForm(ContactData contact)
+        {
+            driver.FindElement(By.Name("firstname")).SendKeys(contact.Firstname);
+            driver.FindElement(By.Name("lastname")).SendKeys(contact.Lastname);
         }
 
         private void ClickAddNew()
@@ -61,9 +67,7 @@ namespace WebAddressbookTests
 
         private void LogIn(AccountData account)
         {
-            driver.FindElement(By.Name("user")).Clear();
             driver.FindElement(By.Name("user")).SendKeys(account.Username);
-            driver.FindElement(By.Name("pass")).Clear();
             driver.FindElement(By.Name("pass")).SendKeys(account.Password);
             driver.FindElement(By.CssSelector("input[type=\"submit\"]")).Click();
         }
