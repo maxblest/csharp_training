@@ -8,14 +8,11 @@ namespace WebAddressbookTests
 {
     public class GroupData
     {
-        private string name;
-        private string header = "";
-        private string footer = "";
+        public string name;
+        public string header = "";
+        public string footer = "";
 
-        public GroupData(string name)
-        {
-            this.name = name;
-        }
+
 
         public GroupData(string name, string header, string footer)
         {
