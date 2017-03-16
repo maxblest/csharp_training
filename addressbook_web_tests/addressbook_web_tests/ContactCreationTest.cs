@@ -17,7 +17,7 @@ namespace WebAddressbookTests
         public void ContactCreationTest()
         {
             OpenHomePage();
-            LogIn(new AccountData("admin", "secret"));
+            loginHelper.LogIn(new AccountData("admin", "secret"));
             ClickAddNew();
             FillContactForm(new ContactData("aaa", "bbb"));
             LogOut();

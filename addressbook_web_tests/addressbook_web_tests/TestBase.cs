@@ -16,12 +16,16 @@ namespace WebAddressbookTests
         private StringBuilder verificationErrors;
         protected string baseURL;
 
+        protected LoginHelper loginHelper;
+
         [SetUp]
         public void SetupTest()
         {
             driver = new FirefoxDriver(new FirefoxBinary("C:\\Program Files\\Mozilla Firefox\\firefox.exe"), new FirefoxProfile());
             baseURL = "http://localhost/";
             verificationErrors = new StringBuilder();
+
+            loginHelper = new LoginHelper(driver);
         }
 
         [TearDown]
@@ -43,13 +47,7 @@ namespace WebAddressbookTests
             driver.Navigate().GoToUrl(baseURL + "addressbook/");
         }
 
-        protected void LogIn(AccountData account)
-        {
-            driver.FindElement(By.Name("user")).Clear();
-            driver.FindElement(By.Name("user")).SendKeys(account.Username);
-            driver.FindElement(By.Name("pass")).Clear();
-            driver.FindElement(By.Name("pass")).SendKeys(account.Password);
-            driver.FindElement(By.CssSelector("input[type=\"submit\"]")).Click();
+
         }
 
         protected void GoToGroupsPage()
@@ -97,6 +95,16 @@ namespace WebAddressbookTests
             driver.FindElement(By.Name("firstname")).SendKeys(contact.Firstname);
             driver.FindElement(By.Name("lastname")).SendKeys(contact.Lastname);
         }
+
+        protected void FillOutGroupForm(GroupData contact)
+        {
+            driver.FindElement(By.Name("group_name")).Clear();
+            driver.FindElement(By.Name("group_name")).SendKeys(group.Name);
+            driver.FindElement(By.Name("group_header")).Clear();
+            driver.FindElement(By.Name("group_header")).SendKeys(group.Header);
+            driver.FindElement(By.Name("group_footer")).Clear();
+            driver.FindElement(By.Name("group_footer")).SendKeys(group.Footer);
+    }
 
     }
 }
