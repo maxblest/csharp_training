@@ -14,15 +14,24 @@ namespace WebAddressbookTests
         [Test]
         public void GroupCreationTest()
         {
-            app.Navigator.OpenHomePage();
-            app.Auth.LogIn(new AccountData("admin", "secret"));
-            app.Navigator.GoToGroupsPage();
-            app.Groups.InitGroupCreation();
-            app.Groups.FillOutGroupForm(new GroupData("aaa", "bbb", "ccc"));
-            app.Groups.SubmitGroupCreation();
-            app.Groups.ReturnToGroupsPage();
+            GroupData group = new GroupData("aaa", "bbb", "ccc");
+
+
+            app.Groups.Create(group);
             app.Auth.LogOut();
         }
+
+        [Test]
+        public void EmptyGroupCreationTest()
+        {
+            GroupData group = new GroupData("","","");
+
+            app.Groups.Create(group);
+            app.Auth.LogOut();
+        }
+
+    }
+
 
 
 
@@ -44,4 +53,4 @@ namespace WebAddressbookTests
 
  
     }
-}
+

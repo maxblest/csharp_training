@@ -37,7 +37,7 @@ namespace WebAddressbookTests
             }
             set
             {
-                
+                password = value;
             }
         }
 
