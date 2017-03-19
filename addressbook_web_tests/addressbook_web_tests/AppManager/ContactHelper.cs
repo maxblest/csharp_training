@@ -17,6 +17,51 @@ namespace WebAddressbookTests
         {
         }
 
+        public ContactHelper Remove(int p)
+        {
+            SelectContact(p);
+            ClickDelete();
+            ConfirmDeletion();
+            manager.Navigator.OpenHomePage();
+            return this;
+        }
+
+        public ContactHelper Modify(int p, ContactData newData)
+        {
+            ClickEdit(p);
+            FillContactForm(newData);
+            UpdateContact();
+            manager.Navigator.OpenHomePage();
+            return this;
+        }
+
+        public ContactHelper Create(ContactData contact)
+        {
+            ClickAddNew();
+            FillContactForm(contact);
+            SubmitContact();
+            manager.Navigator.OpenHomePage();
+            return this;
+        }
+
+        public ContactHelper ClickDelete()
+        {
+            driver.FindElement(By.XPath("//input[@value='Delete']")).Click();
+            return this;
+        }
+
+        public ContactHelper ConfirmDeletion()
+        {
+            driver.SwitchTo().Alert().Accept();
+            return this;
+        }
+
+        public ContactHelper SelectContact(int index)
+        {
+            driver.FindElement(By.XPath("(//input[@name='selected[]'])[" + index + "]")).Click();
+            return this;
+        }
+
 
         public ContactHelper ClickAddNew()
         {
@@ -24,9 +69,30 @@ namespace WebAddressbookTests
             return this;
         }
 
+        public ContactHelper SubmitContact()
+        {
+            driver.FindElement(By.Name("submit")).Click();
+            return this;
+        }
+
+
+        public ContactHelper UpdateContact()
+        {
+            driver.FindElement(By.Name("update")).Click();
+            return this;
+        }
+
+        public ContactHelper ClickEdit(int index)
+        {
+            driver.FindElement(By.XPath("(//img[@alt='Edit'])[" + index + "]")).Click();
+            return this;
+        }
+
         public ContactHelper FillContactForm(ContactData contact)
         {
+            driver.FindElement(By.Name("firstname")).Clear();
             driver.FindElement(By.Name("firstname")).SendKeys(contact.Firstname);
+            driver.FindElement(By.Name("lastname")).Clear();
             driver.FindElement(By.Name("lastname")).SendKeys(contact.Lastname);
             return this;
         }

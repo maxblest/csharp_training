@@ -13,11 +13,9 @@ namespace WebAddressbookTests
         [Test]
         public void ContactCreationTest()
         {
-            ContactData contact = new ContactData("aaa", "bbb");
+            ContactData contact = new ContactData("max1", "max1");
 
-            app.Contacts
-                .ClickAddNew()
-                .FillContactForm(contact);
+            app.Contacts.Create(contact);
             app.Auth.LogOut();
         }
 
