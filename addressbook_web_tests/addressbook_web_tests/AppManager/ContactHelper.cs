@@ -19,6 +19,13 @@ namespace WebAddressbookTests
 
         public ContactHelper Remove(int p)
         {
+            if (!IsElementPresent(By.Name("selected[]")))
+            {
+                ClickAddNew();
+                FillContactForm(new ContactData("new", "new"));
+                SubmitContact();
+                manager.Navigator.OpenHomePage();
+            }
             SelectContact(p);
             ClickDelete();
             ConfirmDeletion();
@@ -28,6 +35,13 @@ namespace WebAddressbookTests
 
         public ContactHelper Modify(int p, ContactData newData)
         {
+            if (!IsElementPresent(By.Name("selected[]")))
+            {
+                ClickAddNew();
+                FillContactForm(newData);
+                SubmitContact();
+                manager.Navigator.OpenHomePage();
+            }
             ClickEdit(p);
             FillContactForm(newData);
             UpdateContact();
