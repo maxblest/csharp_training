@@ -16,6 +16,7 @@ namespace WebAddressbookTests
         {
             ContactData newData = new ContactData("new", "new");
 
+            app.Contacts.Validate();
             app.Contacts.Modify(1, newData);
             app.Navigator.OpenHomePage();
             app.Auth.LogOut();

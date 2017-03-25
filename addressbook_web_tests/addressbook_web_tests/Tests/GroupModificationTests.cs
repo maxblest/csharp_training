@@ -16,6 +16,9 @@ namespace WebAddressbookTests
         public void GroupModificationTest()
         {
             GroupData newData = new GroupData("zzz", null, null);
+
+            app.Navigator.GoToGroupsPage();
+            app.Groups.Validate();
             app.Groups.Modify(1, newData);
             app.Auth.LogOut();
 
