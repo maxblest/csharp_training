@@ -17,6 +17,23 @@ namespace WebAddressbookTests
         {
         }
 
+        public List<ContactData> GetContactList()
+        {
+            List<ContactData> contacts = new List<ContactData>();
+            manager.Navigator.OpenHomePage();
+            ICollection<IWebElement> elements = driver.FindElements(By.Name("entry"));
+
+            foreach (IWebElement element in elements)
+            {
+                IList<IWebElement> cells = element.FindElements(By.TagName("td"));
+                string firstname = cells[1].Text;
+                string lastname = cells[2].Text;
+                contacts.Add(new ContactData(element.Text, element.Text));
+            }
+
+            return contacts;
+        }
+
         public ContactHelper Remove(int p)
         {
             SelectContact(p);
@@ -70,7 +87,7 @@ namespace WebAddressbookTests
 
         public ContactHelper SelectContact(int index)
         {
-            driver.FindElement(By.XPath("(//input[@name='selected[]'])[" + index + "]")).Click();
+            driver.FindElement(By.XPath("(//input[@name='selected[]'])[" + (index+1) + "]")).Click();
             return this;
         }
 
@@ -96,7 +113,7 @@ namespace WebAddressbookTests
 
         public ContactHelper ClickEdit(int index)
         {
-            driver.FindElement(By.XPath("(//img[@alt='Edit'])[" + index + "]")).Click();
+            driver.FindElement(By.XPath("(//img[@alt='Edit'])[" + (index+1) + "]")).Click();
             return this;
         }
 

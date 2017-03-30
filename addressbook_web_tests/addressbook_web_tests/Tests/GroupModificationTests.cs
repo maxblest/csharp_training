@@ -17,11 +17,19 @@ namespace WebAddressbookTests
         {
             GroupData newData = new GroupData("zzz", null, null);
 
+            List<GroupData> oldGroups = app.Groups.GetGroupList();
             app.Navigator.GoToGroupsPage();
             app.Groups.Validate();
-            app.Groups.Modify(1, newData);
-            app.Auth.LogOut();
+            app.Groups.Modify(0, newData);
 
+            List<GroupData> newGroups = app.Groups.GetGroupList();
+            oldGroups[0].Name = newData.Name;
+            oldGroups.Sort();
+            newGroups.Sort();
+            Assert.AreEqual(oldGroups, newGroups);
+            app.Auth.LogOut();
+        
+            
         }
     }
 }
