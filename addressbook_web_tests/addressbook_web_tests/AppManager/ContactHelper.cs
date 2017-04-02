@@ -26,9 +26,10 @@ namespace WebAddressbookTests
             foreach (IWebElement element in elements)
             {
                 IList<IWebElement> cells = element.FindElements(By.TagName("td"));
-                string firstname = cells[1].Text;
-                string lastname = cells[2].Text;
-                contacts.Add(new ContactData(element.Text, element.Text));
+                string firstname = cells[2].Text;
+                string lastname = cells[1].Text;
+                ContactData contact = new ContactData(lastname, firstname);
+                contacts.Add(contact);
             }
 
             return contacts;

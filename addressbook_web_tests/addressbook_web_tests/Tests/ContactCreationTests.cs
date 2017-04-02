@@ -14,15 +14,18 @@ namespace WebAddressbookTests
         [Test]
         public void ContactCreationTest()
         {
-            ContactData contact = new ContactData("max1", "max1");
+            ContactData contact = new ContactData("max2", "max2");
 
             List<ContactData> oldContacts = app.Contacts.GetContactList();
+
             app.Contacts.Create(contact);
 
             List<ContactData> newContacts = app.Contacts.GetContactList();
+
             oldContacts.Add(contact);
             oldContacts.Sort();
             newContacts.Sort();
+
             Assert.AreEqual(oldContacts, newContacts);
             app.Auth.LogOut();
         }

@@ -17,6 +17,7 @@ namespace WebAddressbookTests
         this.lastname = lastname;
     }
 
+
     public string Firstname
     {
         get
@@ -48,7 +49,11 @@ namespace WebAddressbookTests
                 return 1;
             }
 
-            return Lastname.CompareTo(other.Lastname);
+            string a = Firstname + Lastname;
+            string b = other.Firstname + other.Lastname;
+
+
+            return a.CompareTo(b);
         }
 
 
@@ -62,7 +67,8 @@ namespace WebAddressbookTests
             {
                 return true;
             }
-            return Lastname == other.Lastname;
+            return Firstname == other.Firstname
+                   && Lastname == other.Lastname;
         }
 
         public override int GetHashCode()
@@ -72,7 +78,7 @@ namespace WebAddressbookTests
 
         public override string ToString()
         {
-            return "contactname=" + Lastname;
+            return "contactname=" + Firstname + Lastname;
         }
     }
 }
