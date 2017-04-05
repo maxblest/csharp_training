@@ -18,10 +18,10 @@ namespace WebAddressbookTests
 
             app.Contacts.Validate();
             List<ContactData> oldContacts = app.Contacts.GetContactList();
-            app.Contacts.Modify(9, newData);
+            app.Contacts.Modify(0, newData);
             app.Navigator.OpenHomePage();
 
-            Assert.AreEqual(oldContacts.Count + 1, app.Contacts.GetContactCount());
+            Assert.AreEqual(oldContacts.Count, app.Contacts.GetContactCount());
             List<ContactData> newContacts = app.Contacts.GetContactList();
             oldContacts[0].Firstname = newData.Firstname;
             oldContacts[0].Lastname = newData.Lastname;

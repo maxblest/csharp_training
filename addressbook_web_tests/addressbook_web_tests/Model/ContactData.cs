@@ -49,13 +49,15 @@ namespace WebAddressbookTests
             }
         }
 
+        public string Id { get; set; }
+
         private string CleanUp(string phone)
         {
             if (phone == null || phone == "")
             {
                 return "";
             }
-            return Regex.Replace(phone, "[ -()]", "") + "\r\n"; 
+            return Regex.Replace(phone, "[ ()-]", "") + "\r\n"; 
         }
 
         public string AllEmails
@@ -68,7 +70,7 @@ namespace WebAddressbookTests
                 }
                 else
                 {
-                    return Email + "\r\n" + Email2 + "\r\n" + Email3;
+                    return Email + "\r\n" + Email2 + "\r\n" + Email3.Trim();
                 }
             }
             set

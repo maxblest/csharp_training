@@ -63,13 +63,16 @@ namespace WebAddressbookTests
             };
         }
 
+
+
+
         private List<ContactData> contactCache = null;
 
         public List<ContactData> GetContactList()
         {
             if (contactCache == null)
             {
-                List<ContactData> contacts = new List<ContactData>();
+                contactCache = new List<ContactData>();
                 manager.Navigator.OpenHomePage();
                 ICollection<IWebElement> elements = driver.FindElements(By.Name("entry"));
 
@@ -78,8 +81,8 @@ namespace WebAddressbookTests
                     IList<IWebElement> cells = element.FindElements(By.TagName("td"));
                     string firstname = cells[2].Text;
                     string lastname = cells[1].Text;
-                    ContactData contact = new ContactData(lastname, firstname);
-                    contactCache.Add(contact);
+                    contactCache.Add(new ContactData(lastname, firstname)
+                { Id = element.FindElement(By.TagName("input")).GetAttribute("id") });
                 }
             }
             return new List<ContactData>(contactCache);
