@@ -23,6 +23,15 @@ namespace WebAddressbookTests
 
         }
 
+        [Test]
+        public void ContactInfoDetailsTest()
+        {
+            ContactData fromProfile = app.Contacts.GetContactInfoFromDetails(0);
+            ContactData fromForm = app.Contacts.GetContactInfoFromEditForm(0);
 
+            Assert.AreEqual(fromProfile, fromForm);
+            Assert.AreEqual(fromProfile.Address, fromForm.Address);
+
+        }
     }
 }

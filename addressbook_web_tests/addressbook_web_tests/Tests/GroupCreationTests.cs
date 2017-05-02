@@ -10,47 +10,22 @@ namespace WebAddressbookTests
     [TestFixture]
     public class GroupCreationTests : AuthTestBase
     {
-      
 
-        [Test]
-        public void GroupCreationTest()
+        public static IEnumerable<GroupData> RandomGroupDataProvider()
         {
-            GroupData group = new GroupData("aaa", "bbb", "ccc");
-
-            List<GroupData> oldGroups = app.Groups.GetGroupList();
-            app.Groups.Create(group);
-
-            Assert.AreEqual(oldGroups.Count + 1, app.Groups.GetGroupCount());
-
-            List<GroupData> newGroups = app.Groups.GetGroupList();
-            oldGroups.Add(group);
-            oldGroups.Sort();
-            newGroups.Sort();
-            Assert.AreEqual(oldGroups, newGroups);
-
+            List<GroupData> groups = new List<GroupData>();
+            for (int i = 0; i < 5; i++)
+            {
+                groups.Add(new GroupData(GenerateRandomString(30), GenerateRandomString(100), GenerateRandomString(100)));
+            }
+            return groups;
         }
 
-        [Test]
-        public void EmptyGroupCreationTest()
+
+        [Test, TestCaseSource("RandomGroupDataProvider")]
+
+        public void GroupCreationTest(GroupData group)
         {
-            GroupData group = new GroupData("","","");
-
-            List<GroupData> oldGroups = app.Groups.GetGroupList();
-            app.Groups.Create(group);
-
-            Assert.AreEqual(oldGroups.Count + 1, app.Groups.GetGroupCount());
-
-            List<GroupData> newGroups = app.Groups.GetGroupList();
-            oldGroups.Add(group);
-            oldGroups.Sort();
-            newGroups.Sort();
-            Assert.AreEqual(oldGroups, newGroups);
-        }
-
-        [Test]
-        public void InvalidNameGroupCreationTest()
-        {
-            GroupData group = new GroupData("a'", "", "");
 
             List<GroupData> oldGroups = app.Groups.GetGroupList();
             app.Groups.Create(group);
@@ -63,28 +38,6 @@ namespace WebAddressbookTests
             newGroups.Sort();
             Assert.AreEqual(oldGroups, newGroups);
         }
-
     }
-
-
-
-
-
-
-
-
-       
-
-
-
-
-
-
-
- 
-
-       
-
- 
-    }
+}
 
