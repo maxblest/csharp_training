@@ -59,8 +59,12 @@ namespace ConsoleApplication1
 
             for (int i = 0; i < count; i++)
             {
-                contacts.Add(new ContactData(TestBase.GenerateRandomString(10), TestBase.GenerateRandomString(10)));
+                contacts.Add(new ContactData(TestBase.GenerateRandomString(10), TestBase.GenerateRandomString(10))
+                {
+                    AllEmails = TestBase.GenerateRandomString(10)
+                });
             }
+
             if (format == "xml")
             {
                 writeContactsToXmlFile(contacts, writer);
@@ -75,7 +79,7 @@ namespace ConsoleApplication1
                 System.Console.Out.Write("Unrecognized format/data type " + format + dataType);
             }
 
-                writer.Close();
+            writer.Close();
         }
         }
 

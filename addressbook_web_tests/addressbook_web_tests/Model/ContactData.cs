@@ -60,7 +60,7 @@ namespace WebAddressbookTests
         {
             get
             {
-                if (AllFields != null)
+                if (allFields != null)
                 {
                     return allFields;
                 }
