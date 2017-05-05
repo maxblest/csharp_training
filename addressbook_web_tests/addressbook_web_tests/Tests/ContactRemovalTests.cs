@@ -5,24 +5,27 @@ using System.Text;
 using System.Threading.Tasks;
 using NUnit.Framework;
 
+
 namespace WebAddressbookTests
 {
     [TestFixture]
-    public class ContactRemoval : AuthTestBase
+    public class ContactRemoval : ContactTestBase
     {
 
         [Test]
         public void ContactRemovalTest()
         {
             app.Contacts.Validate();
-            List<ContactData> oldContacts = app.Contacts.GetContactList();
-            app.Contacts.Remove(0);
+            List<ContactData> oldContacts = ContactData.GetAll();
+            ContactData toBeRemoved = oldContacts[0];
+
+            app.Contacts.Remove(toBeRemoved);
 
             Assert.AreEqual(oldContacts.Count - 1, app.Contacts.GetContactCount());
-            List<ContactData> newContacts = app.Contacts.GetContactList();
+            List<ContactData> newContacts = ContactData.GetAll();
             oldContacts.RemoveAt(0);
-            oldContacts.Sort();
-            newContacts.Sort();
+            //oldContacts.Sort();
+            //newContacts.Sort();
             Assert.AreEqual(oldContacts, newContacts);
             app.Auth.LogOut();
         }
